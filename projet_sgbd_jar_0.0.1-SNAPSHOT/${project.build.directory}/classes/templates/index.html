@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <div th:replace="partials :: header"></div>
+    <body>
+        <div th:replace="partials :: navigation"></div>
+        <div class="container-md my-5">
+                    <div class="table-responsive-sm">
+                      <table class="table table-dark table-striped table-hover text-center align-middle">
+                          <caption><a th:href="@{/allComments/newComment}" class="btn btn-dark">Nouveau commentaire <i class="bi bi-person-plus"></i></caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Texte</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Heure</th>
+                                <th scope="col">Valide</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="comment :${listComments}" >
+                                   <th th:text="${comment.id}" scope="row"></th>
+                                   <td th:text="${comment.texte}"></td>
+                                   <td th:text="${#calendars.format(comment.date,'dd/MM/yyyy')}"></td>
+                                   <td th:text="${#calendars.format(comment.heure,'HH:mm:ss')}"></td> 
+                                   <td th:text="${comment.valide}"></td>
+                                   <td class="p-0 me-2" >
+                                       <a  class="btn btn-outline-light">Editer<i class="bi bi-pencil-square"></i></a>
+                                   </td>
+                                   <td class="px-0">
+                                       <a  class="btn btn-outline-light">Supprimer<i class="bi bi-trash"></i></a>
+                                  </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                   </div>
+        </div>
+        <div th:replace="partials :: footer"></div>
+    </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <div th:replace="partials :: header"></div>
+    <body>
+        <div th:replace="partials :: navigation"></div>
+        <div class="container-md">
+            <div class="row justify-content-center my-5">
+                    <div class="text-center mb-3">
+                       <p th:text="|Formulaire d'édition de l'utilisateur '${user.login}'|" class="lead font-monospace shadow-sm w-50 mx-auto "></p>
+                    </div>
+                 <div class="col-lg-6">
+                    <form action="#" th:action="@{/users/saveUpdateUser}" th:object="${user}" method="POST">
+                        
+                        <input type="hidden" th:field="*{id}"/>
+                        <input type="hidden" th:field="*{comments}"/>
+                        
+                        <label for="nom" class="form-label">Nom:</label>
+                        <div class="input-group mb-4">
+                             <span class="input-group-text">  
+                                 <i class="bi bi-chat-right-dots-fill"></i>
+                             </span>
+                             <input id="nom" type="text" class="form-control" th:field="*{nom}"/>
+                        </div>
+                        <p class="text-danger fst-italic fw-light" th:errors="*{nom}"></p>
+                        
+                        <label for="prenom" class="form-label">Prenom:</label>
+                        <div class="input-group mb-4">
+                             <span class="input-group-text">  
+                                 <i class="bi bi-chat-right-dots-fill"></i>
+                             </span>
+                             <input id="prenom" type="text" class="form-control" th:field="*{prenom}"/>
+                        </div>
+                        <p class="text-danger fst-italic fw-light" th:errors="*{prenom}"></p>
+                        
+                         <label for="login" class="form-label">Login:</label>
+                        <div class="input-group mb-4">
+                             <span class="input-group-text">  
+                                 <i class="bi bi-person-fill"></i>
+                             </span>
+                             <input id="login" type="text" class="form-control" th:field="*{login}"/>
+                        </div>
+                         <p class="text-danger fst-italic fw-light" th:text="${message}"></p>
+                         <p class="text-danger fst-italic fw-light" th:errors="*{login}"></p>
+                         
+                        <label for="pass" class="form-label">Password:</label>
+                        <div class="input-group mb-4">
+                             <span class="input-group-text">  
+                                 <i class="bi bi-lock-fill"></i>
+                             </span>
+                             <input id="pass" type="password" class="form-control" th:field="*{password}"/>
+                             <span class="input-group-text action">
+                                 <span class="bsTooltip"  >
+                                     <i class="bi bi-eye-slash-fill"></i>
+                                 </span>
+                             </span>
+                        </div>
+                        <p class="text-danger fst-italic fw-light" th:errors="*{password}"></p>
+          
+                        <div class="mb-4 text-center">
+                            <button type="submit" class="btn btn-secondary me-1">Submit</button>
+                            <a th:href="@{/users/cancelFormU}" class="btn btn-secondary">Annuler</a>
+                       </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+       <div th:replace="partials :: footer"></div>
+    </body>
+</html>

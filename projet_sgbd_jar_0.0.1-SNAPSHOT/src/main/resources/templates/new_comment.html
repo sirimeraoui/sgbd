@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <div th:replace="partials :: header"></div>
+    <body>
+        <div th:replace="partials :: navigation"></div>
+        <div class="container-md">
+            <div class="row justify-content-center my-5">
+                    <div class="text-center">
+                      <p class="lead font-monospace shadow-sm w-50 mx-auto">Formulaire d'ajout de commentaire</p>
+                    </div>
+                 <div class="col-lg-6">
+                    <form action="#" th:action="@{/comments/saveNewComment}" th:object="${comment}" method="POST">
+                        <label for="users" class="form-label">Utilisateur:</label>
+                        <div class="input-group mb-4">
+                            <span class="input-group-text">
+                                <i class="bi bi-chat-right-dots-fill"></i>
+                            </span>
+                            <select id="users" class="form-select" th:field="*{user}">
+                                <option th:value="0">Sélectionnez un utilisateur</option>
+                                <option th:each="user : ${listUsers}"
+                                        th:value="${user.id}"
+                                        th:text="${user.login}">
+                                </option>
+                            </select>
+                        </div>
+                        <p class="text-danger fst-italic fw-light" th:errors="*{user}"></p>
+                         
+                        <div class="form-floating mb-4 mt-5">
+                            <textarea id="text" class="form-control" th:field="*{texte}" style="height:140px"></textarea>
+                            <label for="text"><p class="text-muted fst-italic fw-bold">Votre commentaire...</p></label>
+                        </div>
+                        <p class="text-danger fst-italic fw-light" th:errors="*{texte}"></p>
+                        
+                        
+                        <label for="valid" class="form-label">Validation:</label>
+                        <div class="input-group mb-4">
+                            <span class="input-group-text">
+                                <i class="bi bi-exclamation-square-fill"></i>
+                            </span>
+                            <select id="valid" class="form-select" th:field="*{valide}">     
+                                <option th:value="false" th:text="Annuler"></option>
+                                <option th:value="true" th:text="Valider" selected></option>
+                                
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4 text-center">
+                            <button type="submit" class="btn btn-secondary me-1">Submit</button>
+                            <a th:href="@{/comments/cancelFormC}" class="btn btn-secondary">Annuler</a>
+                       </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div th:replace="partials :: footer"></div>
+    </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<div th:replace="partials :: header"></div>
+
+<body>
+    <div th:replace="partials :: navigation"></div>
+    <div class="container-md my-5">
+        <div class="table-responsive-sm">
+            <div class="col-12">
+                <h2 th:text="${title}"
+                    class=" shadow pb-2 mb-5 rounded-pill text-center text-white bg-dark fst-italic display-6"></h2>
+            </div>
+            <table class="table table-dark table-striped table-hover text-center align-middle">
+                <caption class="text-center"><a th:href="@{/users/newUser}" class="btn btn-dark">Nouvel utilisateur <i
+                            class="bi bi-person-plus"></i></a></caption>
+                <thead class="d-none">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prenom</th>
+                        <th scope="col">Login</th>
+                        <th scope="col">Password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="user :${listUsers}">
+                        <th th:text="${user.id}" scope="row"></th>
+                        <td th:text="${user.nom}"></td>
+                        <td th:text="${user.prenom}"></td>
+                        <td th:text="${user.login}"></td>
+                        <td th:text="${user.password}"></td>
+                        <td class="p-0 me-2">
+                            <a th:href="@{/users/updateUser(id=${user.id})}" class="btn btn-outline-light">Editer<i
+                                    class="bi bi-person"></i></a>
+                        </td>
+                        <td class="px-0 me-2">
+                            <a class="btn btn-outline-light" th:href="@{/users/deleteUser/(id=${user.id})}">Supprimer <i
+                                    class="bi bi-person-x"></i></i></a>
+                        </td>
+                        <td class="px-0">
+                            <a th:href="@{/users/userComments(id=${user.id})}"
+                                class="btn btn-outline-light">Commentaires <i class="bi bi-chat-left-text"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div th:replace="partials :: footer"></div>
+</body>
+
+</html>
